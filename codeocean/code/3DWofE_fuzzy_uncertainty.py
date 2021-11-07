@@ -72,7 +72,7 @@ for i in range(num_fac):
 
 input_file = open("../data/Input_Continuous.csv", errors="ignore")
 input_reader = csv.reader(input_file)
-output_file = open("../results/Variance_Continuous.csv", "wb")
+output_file = open("../results/Variance_Continuous.csv", "w")
 output_writer = csv.writer(output_file)
 variance_continuous_temp = []
 for row in input_reader:
