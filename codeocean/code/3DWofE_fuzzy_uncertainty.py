@@ -23,16 +23,17 @@ del input_reader
 
 # A list of variance for negative weights of binary models
 print("variance negative weights")
-input_file = open("../data/3DWofE_fuzzy_uncertainty/Var_W_neg_Binary.csv", encoding='latin1')
+input_file = open("../data/3DWofE_fuzzy_uncertainty/Var_W_neg_Binary.csv")
 input_reader = csv.reader(input_file)
 for row in input_reader:
     binary_var_w_neg = row
 del input_file
 del input_reader
 
+print("input binary")
 input_file = open("../data/Input_Binary.csv")
 input_reader = csv.reader(input_file)
-output_file = open("../results/Variance_Binary.csv", "w")
+output_file = open("../results/Variance_Binary.csv", "w", newline='')
 output_writer = csv.writer(output_file)
 variance_binary_temp = []
 for row in input_reader:
@@ -52,7 +53,8 @@ del output_file
 del output_writer
 
 # Continuous models
-input_file = open("../data/Input_Continuous.csv", encoding="utf-8")
+print("Continous models")
+input_file = open("../data/Input_Continuous.csv")
 input_reader = csv.reader(input_file)
 for row in input_reader:
     num_fac = len(row)-4
@@ -72,7 +74,7 @@ for i in range(num_fac):
 
 input_file = open("../data/Input_Continuous.csv", errors="ignore")
 input_reader = csv.reader(input_file)
-output_file = open("../results/Variance_Continuous.csv", "w")
+output_file = open("../results/Variance_Continuous.csv", "w", newline='')
 output_writer = csv.writer(output_file)
 variance_continuous_temp = []
 for row in input_reader:
@@ -104,14 +106,16 @@ del output_file
 del output_writer
 
 # Total variance/uncertainty of each voxel
-input1_file = open("../results/Variance_Binary.csv")
+input1_file = open("../results/Variance_Binary.csv", encoding="Latin-1")
 input1_reader = csv.reader(input1_file)
 input2_file = open("../results/Variance_Continuous.csv")
 input2_reader = csv.reader(input2_file)
-output_file = open("../results/Total Variance.csv", "w")
+output_file = open("../results/Total Variance.csv", "w", newline='')
 output_writer = csv.writer(output_file)
 totalVariance_temp = []
-for row1, row2 in itertools.izip(input1_reader, input2_reader):
+for row1, row2 in zip(input1_reader, input2_reader):
+    print(row1)
+    print(row2)
     totalVariance_temp.append(row[0])
     totalVariance_temp.append(row[1])
     totalVariance_temp.append(row[2])
@@ -132,10 +136,10 @@ input1_file = open("../data/3DWofE_fuzzy_uncertainty/Posterior Probability.csv")
 input1_reader = csv.reader(input1_file)
 input2_file = open("../results/Total Variance.csv")
 input2_reader = csv.reader(input2_file)
-output_file = open("../results/Studentized Posterior Probability.csv", "wb")
+output_file = open("../results/Studentized Posterior Probability.csv", "w", newline='',  encoding="Latin-1" )
 output_writer = csv.writer(output_file)
 row_temp = []
-for row1, row2 in itertools.izip(input1_reader, input2_reader):
+for row1, row2 in zip(input1_reader, input2_reader):
     row_temp.append(row1[0])
     row_temp.append(row1[1])
     row_temp.append(row1[2])
