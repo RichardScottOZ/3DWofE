@@ -108,7 +108,7 @@ input1_file = open("../results/Variance_Binary.csv")
 input1_reader = csv.reader(input1_file)
 input2_file = open("../results/Variance_Continuous.csv")
 input2_reader = csv.reader(input2_file)
-output_file = open("../results/Total Variance.csv", "wb")
+output_file = open("../results/Total Variance.csv", "w")
 output_writer = csv.writer(output_file)
 totalVariance_temp = []
 for row1, row2 in itertools.izip(input1_reader, input2_reader):
