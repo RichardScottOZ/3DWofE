@@ -6,19 +6,22 @@ import math
 
 # Number of voxels for different items
 # NumT: total number of voxels
-input_file = open("D:/Input.csv")
-input_reader = csv.reader(input_file)
+input_fileR = "C:/users/rscott/Downloads/woftest2.csv"
+input_file = open(input_fileR)
+input_reader = csv.reader(input_fileR)
 NumT = 0
 for row in input_reader:
     NumT += 1
 del input_file
 del input_reader
 NumT = float(NumT)
+NumT = 10625
+print("NumT", NumT)
 
 # NumD: number of known mineralization-bearing voxels
-input_file = open("D:/Input.csv")
+input_file = open(input_fileR)
 input_reader = csv.reader(input_file)
-threshold = 0.4 # Replace with your desired number
+threshold = 0.368 # Replace with your desired number
 NumD = 0
 for row in input_reader:
     if float(row[3]) > threshold:
@@ -26,11 +29,12 @@ for row in input_reader:
 del input_file
 del input_reader
 NumD = float(NumD)
+print("NumD", NumD)
 
 # NumB: number of anomalous voxels in evidential models
-input_file = open("D:/Input.csv")
+input_file = open(input_fileR)
 input_reader = csv.reader(input_file)
-thresholds = [] # Fill the list with your desired numbers
+thresholds = [0.375] # Fill the list with your desired numbers
 NumB = [0]*len(thresholds)
 for row in input_reader:
     for i in range(len(thresholds)):
@@ -38,9 +42,10 @@ for row in input_reader:
             NumB[i] += 1
 del input_file
 del input_reader
+print("NumB", NumB)
 
 # NumBD: number of intersected mineralization-bearing voxels and anomalous voxels of evidential models
-input_file = open("D:/Input.csv")
+input_file = open(input_fileR)
 input_reader = csv.reader(input_file)
 NumBD = [0]*len(thresholds)
 for row in input_reader:
@@ -49,6 +54,7 @@ for row in input_reader:
             NumBD[i] += 1
 del input_file
 del input_reader
+print("NumBD", NumBD)
 
 # Required probabilities, odds and logits
 ProBD = []
@@ -71,15 +77,18 @@ i = 0
 for n in NumB:
     ProB_absD_abs.append((NumT-n-NumD+NumBD[i])/(NumT-NumD))
     i += 1
+print(ProB_absD_abs)
 
 LS = []
 i = 0
 for p in ProBD:
     LS.append(p/ProBD_abs[i])
     i += 1
+print(LS)
 
 W_pos = []
 for i in LS:
+    print("LSi", i)
     W_pos.append(math.log(i))
 
 LN = []
@@ -93,8 +102,10 @@ for i in LN:
     W_neg.append(math.log(i))
 
 prior_p = NumD/NumT
+print("prior_p", prior_p)
 
 prior_o = prior_p/(1-prior_p)
+print("prior_o", prior_o)
 
 prior_l = math.log(prior_o)
 
@@ -123,9 +134,9 @@ for i in post_o_DB_abs:
     post_p_DB_abs.append(i/1+i)
 
 # Combining evidential models
-input_file = open("D:/Input.csv")
+input_file = open(input_fileR)
 input_reader = csv.reader(input_file)
-output_file = open("D:/Weights.csv", "wb")
+output_file = open("D:/Weights.csv", "w")
 output_writer = csv.writer(output_file)
 row_temp = []
 for row in input_reader:
@@ -146,17 +157,19 @@ del output_writer
 
 input_file = open("D:/Weights.csv")
 input_reader = csv.reader(input_file)
-output_file = open("D:/Posterior Logit.csv", "wb")
+output_file = open("D:/Posterior Logit.csv", "w")
 output_writer = csv.writer(output_file)
 row_temp = []
 for row in input_reader:
-    row_temp.append(row[0])
-    row_temp.append(row[1])
-    row_temp.append(row[2])
-    list_temp = [float(n) for n in row[3:]]
-    row_temp.append(prior_l+sum(list_temp))
-    output_writer.writerow(row_temp)
-    row_temp = []
+    #print(row)
+    if len(row) > 1:
+        row_temp.append(row[0])
+        row_temp.append(row[1])
+        row_temp.append(row[2])
+        list_temp = [float(n) for n in row[3:]]
+        row_temp.append(prior_l+sum(list_temp))
+        output_writer.writerow(row_temp)
+        row_temp = []
 del input_file
 del input_reader
 del output_file
@@ -164,16 +177,17 @@ del output_writer
 
 input_file = open("D:/Posterior Logit.csv")
 input_reader = csv.reader(input_file)
-output_file = open("D:/Posterior Odds.csv", "wb")
+output_file = open("D:/Posterior Odds.csv", "w")
 output_writer = csv.writer(output_file)
 row_temp = []
 for row in input_reader:
-    row_temp.append(row[0])
-    row_temp.append(row[1])
-    row_temp.append(row[2])
-    row_temp.append(math.exp(float(row[3])))
-    output_writer.writerow(row_temp)
-    row_temp = []
+    if len(row) > 1:
+        row_temp.append(row[0])
+        row_temp.append(row[1])
+        row_temp.append(row[2])
+        row_temp.append(math.exp(float(row[3])))
+        output_writer.writerow(row_temp)
+        row_temp = []
 del input_file
 del input_reader
 del output_file
@@ -181,16 +195,17 @@ del output_writer
 
 input_file = open("D:/Posterior Odds.csv")
 input_reader = csv.reader(input_file)
-output_file = open("D:/Posterior Probability.csv", "wb")
+output_file = open("D:/Posterior Probability.csv", "w")
 output_writer = csv.writer(output_file)
 row_temp = []
 for row in input_reader:
-    row_temp.append(row[0])
-    row_temp.append(row[1])
-    row_temp.append(row[2])
-    row_temp.append(float(row[3])/(1+float(row[3])))
-    output_writer.writerow(row_temp)
-    row_temp = []
+    if len(row) > 1:
+        row_temp.append(row[0])
+        row_temp.append(row[1])
+        row_temp.append(row[2])
+        row_temp.append(float(row[3])/(1+float(row[3])))
+        output_writer.writerow(row_temp)
+        row_temp = []
 del input_file
 del input_reader
 del output_file
@@ -201,7 +216,10 @@ input_file = open("D:/Posterior Probability.csv")
 input_reader = csv.reader(input_file)
 list_temp = []
 for row in input_reader:
-    list_temp.append(float(row[3]))
+    if len(row) > 1:
+        list_temp.append(float(row[3]))
 del input_file
 del input_reader
 predictedNum = sum(list_temp)
+
+print(predictedNum)

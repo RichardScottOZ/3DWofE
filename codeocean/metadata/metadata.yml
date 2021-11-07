@@ -1,0 +1,26 @@
+metadata_version: 1
+name: '3DWofE: An open-source software for three-dimensional weights of evidence modeling'
+description: This capsule contains the scripts required for three-dimensional mineral prospectivity modeling of concealed ore deposits using the weights of evidence method. The scripts required for creating posterior probability and studentized posterior probability models using the ordinary and fuzzy weights of evidence methods are available in this capsule.
+tags:
+- Mineral Exploration
+- Economic Geology
+- Bayesian Inference
+authors:
+- name: Ehsan Farahbakhsh
+  affiliations:
+  - name: Amirkabir University of Technology
+- name: Ardeshir Hezarkhani
+  affiliations:
+  - name: Amirkabir University of Technology
+- name: Taymour Eslamkish
+  affiliations:
+  - name: Amirkabir University of Technology
+- name: Abbas Bahroudi
+  affiliations:
+  - name: University of Tehran
+- name: Rohitash Chandra
+  affiliations:
+  - name: University of New South Wales
+corresponding_contributor:
+  name: Ehsan Farahbakhsh
+  email: e.farahbakhsh@aut.ac.ir

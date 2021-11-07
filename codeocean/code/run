@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -ex
+
+# This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+python -u 3DWofE_fuzzy_uncertainty.py "$@"
+
+# The previous version of this file was commented-out and follows below:
+# 
+# python -u 3DWofE_fuzzy_variance.py "$@"
+# 
+# # The previous version of this file was commented-out and follows below:
+# # 
+# # python -u 3DWofE_contrast_binary.py "$@"
+# # 
+# # # The previous version of this file was commented-out and follows below:
+# # # 
+# # # python -u 3DWofE_fuzzy.py "$@"
+# # # 
+# # # # The previous version of this file was commented-out and follows below:
+# # # # 
+# # # # python -u 3DWofE_fuzzyWeights_percentile.py "$@"
+# # # # 
+# # # # # The previous version of this file was commented-out and follows below:
+# # # # # 
+# # # # # python -u 3DWofE_fuzzy.py "$@"
+# # # # # 
+# # # # 
+# # # 
+# # 
+# 
