@@ -32,7 +32,7 @@ del input_reader
 
 input_file = open("../data/Input_Binary.csv")
 input_reader = csv.reader(input_file)
-output_file = open("../results/Variance_Binary.csv", "wb")
+output_file = open("../results/Variance_Binary.csv", "w")
 output_writer = csv.writer(output_file)
 variance_binary_temp = []
 for row in input_reader:
