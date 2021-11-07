@@ -1,14 +1,19 @@
 # Uncertainty and studentized posterior probability models
 # --------------------------------------------------------
+import os
 import csv
 import itertools
 import math
 import pandas
 
+if not os.path.isdir('../results'):
+   os.mkdir('../results')
+   
 # Threshold for target element
 threshold = 0.4
 
 # A list of variance for positive weights of binary models
+print("variance positive weights")
 input_file = open("../data/3DWofE_fuzzy_uncertainty/Var_W_pos_Binary.csv")
 input_reader = csv.reader(input_file)
 for row in input_reader:
@@ -17,7 +22,8 @@ del input_file
 del input_reader
 
 # A list of variance for negative weights of binary models
-input_file = open("../data/3DWofE_fuzzy_uncertainty/Var_W_neg_Binary.csv")
+print("variance negative weights")
+input_file = open("../data/3DWofE_fuzzy_uncertainty/Var_W_neg_Binary.csv", encoding='latin1')
 input_reader = csv.reader(input_file)
 for row in input_reader:
     binary_var_w_neg = row
@@ -46,7 +52,7 @@ del output_file
 del output_writer
 
 # Continuous models
-input_file = open("../data/Input_Continuous.csv")
+input_file = open("../data/Input_Continuous.csv", encoding="utf-8")
 input_reader = csv.reader(input_file)
 for row in input_reader:
     num_fac = len(row)-4
@@ -64,7 +70,7 @@ for i in range(num_fac):
     thresholds_continuous.append(thresholds_continuous_temp)
     varProD.append(varProD_temp)
 
-input_file = open("../data/Input_Continuous.csv")
+input_file = open("../data/Input_Continuous.csv", errors="ignore")
 input_reader = csv.reader(input_file)
 output_file = open("../results/Variance_Continuous.csv", "wb")
 output_writer = csv.writer(output_file)
