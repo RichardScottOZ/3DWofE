@@ -114,8 +114,6 @@ output_file = open("../results/Total Variance.csv", "w", newline='')
 output_writer = csv.writer(output_file)
 totalVariance_temp = []
 for row1, row2 in zip(input1_reader, input2_reader):
-    print(row1)
-    print(row2)
     totalVariance_temp.append(row[0])
     totalVariance_temp.append(row[1])
     totalVariance_temp.append(row[2])
@@ -136,7 +134,7 @@ input1_file = open("../data/3DWofE_fuzzy_uncertainty/Posterior Probability.csv")
 input1_reader = csv.reader(input1_file)
 input2_file = open("../results/Total Variance.csv")
 input2_reader = csv.reader(input2_file)
-output_file = open("../results/Studentized Posterior Probability.csv", "w", newline='',  encoding="Latin-1" )
+output_file = open("../results/Studentized Posterior Probability.csv", "w", newline='',  encoding="utf-8" )
 output_writer = csv.writer(output_file)
 row_temp = []
 for row1, row2 in zip(input1_reader, input2_reader):
