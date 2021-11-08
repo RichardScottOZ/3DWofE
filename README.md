@@ -5,6 +5,11 @@
 
 Also see https://codeocean.com/capsule/6217621/tree/v1  
 
+Workflow chart - https://www.sciencedirect.com/science/article/pii/S2665963820300300
+
+![image](https://user-images.githubusercontent.com/72196131/140813238-8f3d4ca0-5a63-4278-85df-f05f480078f2.png)
+
+
 ![Model](https://github.com/e-farahbakhsh/3D_WofE/blob/master/Results/Model.png)
 
 This repository contains the scripts required for 3D mineral prospectivity modeling using the weights of evidence method. The scripts required for creating posterior probability and studentized posterior probability models using the ordinary and fuzzy weights of evidence methods can be found in "WofE" and "Fuzzy WofE" folders, respectively.
