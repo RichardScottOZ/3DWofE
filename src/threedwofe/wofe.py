@@ -224,7 +224,7 @@ class WeightsOfEvidence:
         output_data = []
 
         for row in data:
-            if len(row) > 1:
+            if len(row) > 3:
                 weights = [float(w) for w in row[3:]]
                 posterior_logit = core.calculate_posterior_logit(self.prior_l, weights)
                 output_data.append([row[0], row[1], row[2], posterior_logit])
@@ -263,7 +263,7 @@ class WeightsOfEvidence:
         output_data = []
 
         for row in data:
-            if len(row) > 1:
+            if len(row) > 3:
                 posterior_odds = core.calculate_posterior_odds(float(row[3]))
                 output_data.append([row[0], row[1], row[2], posterior_odds])
 
@@ -301,7 +301,7 @@ class WeightsOfEvidence:
         output_data = []
 
         for row in data:
-            if len(row) > 1:
+            if len(row) > 3:
                 posterior_prob = core.calculate_posterior_probability(float(row[3]))
                 output_data.append([row[0], row[1], row[2], posterior_prob])
 
