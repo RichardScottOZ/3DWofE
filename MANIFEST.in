@@ -1,0 +1,7 @@
+include README.md
+include README_NEW.md
+include LICENSE
+include pyproject.toml
+include setup.py
+recursive-include examples *.py
+recursive-include src *.py
